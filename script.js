@@ -1,19 +1,8 @@
 // Valores digitados
-const inputValor = document.getElementById('valor');
+const inputValor = document.querySelector('input');
 const moedaDestino = document.getElementById('moedaDestino');
 const moedaOrigem = document.getElementById('moedaOrigem');
 const btnCarregar = document.querySelector('button');
-
-//Carregar os dados depois de apertar o botao
-btnCarregar.addEventListener('click', async() => {
-    const valor = Number(inputValor.value);
-    const origem = moedaOrigem.value;
-    const destino = moedaDestino.value;
-    
-    const resultado = await converterMoeda(valor, moedaOrigem, moedaDestino);
-    console.log(resultado);
-
-})
 
 // Criar uma funcão para converter moedas (especifico)
 async function converterMoeda(valor, moedaOrigem, moedaDestino) {
@@ -31,8 +20,18 @@ async function converterMoeda(valor, moedaOrigem, moedaDestino) {
     }
 }
 
+//Carregar os dados depois de apertar o botao
+btnCarregar.addEventListener('click', async() => {
+    const valor = Number(inputValor.value);
+    const origem = moedaOrigem.value;
+    const destino = moedaDestino.value;
+    
+    const resultado = await converterMoeda(valor, origem, destino);
+    console.log(resultado);
+
+})
+
 
 //retornar uma resposta com o valor convertido
-console.log(converterMoeda(50, "USD", "BRL")
-    .then(resultado => console.log(`O valor convertido é: ${resultado.toFixed(2)}}`))
-);
+converterMoeda(50, "USD", "BRL")
+  .then(resultado => console.log(`O valor convertido é: ${resultado.toFixed(2)}`));
